@@ -1,0 +1,154 @@
+-- phpMyAdmin SQL Dump
+-- version 5.2.1
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1:3309
+-- Generation Time: Apr 12, 2023 at 10:53 PM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.2.4
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `alternakraft`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `appliance`
+--
+
+CREATE TABLE `appliance` (
+  `id` int(11) NOT NULL,
+  `appliance_type` varchar(150) NOT NULL,
+  `manufacturer` varchar(150) NOT NULL,
+  `model` varchar(150) NOT NULL,
+  `aircondition` int(11) NOT NULL,
+  `heater` int(11) NOT NULL,
+  `heatpump` int(11) NOT NULL,
+  `energyratio` int(11) NOT NULL,
+  `energysource` int(11) NOT NULL,
+  `capacity` varchar(100) NOT NULL,
+  `btu` int(11) NOT NULL,
+  `temperature` int(11) NOT NULL,
+  `energysource2` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `appliance`
+--
+
+INSERT INTO `appliance` (`id`, `appliance_type`, `manufacturer`, `model`, `aircondition`, `heater`, `heatpump`, `energyratio`, `energysource`, `capacity`, `btu`, `temperature`, `energysource2`) VALUES
+(6, 'Air handler', 'Quarkingen', '25000', 0, 0, 0, 2500, 0, '', 0, 0, ''),
+(7, 'Air handler', 'Varmvatten', 'sdfasdfaf', 0, 0, 0, 0, 0, '', 0, 0, ''),
+(8, 'Air handler', 'Quarkingen', 'sdfasdf', 1, 1, 0, 0, 0, '', 0, 0, ''),
+(9, 'Air handler', 'Quarkingen', 'KIddfdf', 0, 1, 0, 0, 0, '', 0, 0, '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `household`
+--
+
+CREATE TABLE `household` (
+  `id` int(11) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `pincode` int(11) NOT NULL,
+  `hometype` varchar(100) NOT NULL,
+  `footage` varchar(100) NOT NULL,
+  `heating` varchar(100) NOT NULL,
+  `noheat` int(11) NOT NULL,
+  `colling` varchar(100) NOT NULL,
+  `nocolling` int(11) NOT NULL,
+  `uelectric` int(11) NOT NULL,
+  `ugas` int(11) NOT NULL,
+  `usteam` int(11) NOT NULL,
+  `ufuel` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `household`
+--
+
+INSERT INTO `household` (`id`, `email`, `pincode`, `hometype`, `footage`, `heating`, `noheat`, `colling`, `nocolling`, `uelectric`, `ugas`, `usteam`, `ufuel`) VALUES
+(1, '', 0, '', '', '', 0, '', 0, 0, 0, 0, 0),
+(2, '', 0, '', '', '', 0, '', 0, 0, 0, 0, 0),
+(3, '', 0, '', '', '', 0, '', 0, 0, 0, 0, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `power`
+--
+
+CREATE TABLE `power` (
+  `id` int(11) NOT NULL,
+  `ptype` varchar(100) NOT NULL,
+  `mkwh` varchar(100) NOT NULL,
+  `skwh` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `power`
+--
+
+INSERT INTO `power` (`id`, `ptype`, `mkwh`, `skwh`) VALUES
+(3, 'Solar-electric', '2500', '2500');
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `appliance`
+--
+ALTER TABLE `appliance`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `household`
+--
+ALTER TABLE `household`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `power`
+--
+ALTER TABLE `power`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `appliance`
+--
+ALTER TABLE `appliance`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT for table `household`
+--
+ALTER TABLE `household`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `power`
+--
+ALTER TABLE `power`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

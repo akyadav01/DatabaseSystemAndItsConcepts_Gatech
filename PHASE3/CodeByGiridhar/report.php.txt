@@ -1,0 +1,58 @@
+<?php 
+if($_REQUEST['manu']){
+$query = "select * from appliance where manufacturer = '".$_REQUEST['manu']."' order by id desc";
+$res = mysqli_query($conn,$query);
+$arows = mysqli_num_rows($res);
+echo "<h1>You are viewing ".$_REQUEST['manu']." details</h1>";
+echo "<table border = 1 width = '80%'><tr>
+<td>Appliance#</td>
+<td>Type</td>
+<td>Model</td>
+</tr>";
+$i = 1;
+while($v = mysqli_fetch_array($res)){
+echo "<tr>
+<td>".$i++."</td>
+<td>".$v['appliance_type']."</td>
+<td>".$v['model']."</td>
+</tr>";
+
+}
+echo "</table>";
+echo "<p><a href = '?step=report&report_type=top25'>Back</a></p>";
+}else if($_REQUEST['report_type'] == 'top25'){
+$query = "select manufacturer,count(*) as cnt from appliance group by manufacturer order by cnt desc limit 25 ";
+$res = mysqli_query($conn,$query);
+if (mysqli_error($conn))
+{
+    die("report failed: " . mysqli_error($conn));
+}
+echo "<h1>Top 25 Manufacturers</h1>";
+echo "<table border = 1 width = '80%'>
+<tr><td>Manufacturer</td><td>Count</td></tr>
+";
+while($v = mysqli_fetch_array($res)){
+echo "<tr>
+<td><a href = '?step=report&manu=".$v['manufacturer']."'>".$v['manufacturer']."</a></td>
+<td><a href = '?step=report&manu=".$v['manufacturer']."'>".$v['cnt']."</a></td></tr>";
+}
+echo "</table>";
+echo "<p><a href = '?'>Home</a></p>";
+}else{
+?>
+<h1>View reports</h1>
+<form id = 'fstep3' action="?step=report&report_type=top25" method = 'post'> 
+           <div class="field">
+                <select name="ptype" id="ptype" >
+                <option value="">Select Report type:</option>
+                <option value="Top 25 manufacturer">Top 25 manufacturer</option>
+				<option value="Manufacturer/model search">Manufacturer/model search</option>
+				<option value="Heating/cooling method details">Heating/cooling method details</option>
+				<option value="Water heater statistics by state">Water heater statistics by state</option>
+				<option value="Off-the-grid household dashboard">Off-the-grid household dashboard</option>
+				<option value="Household averages by radius">Household averages by radius</option>		
+                </select>
+            </div>
+			<input type='submit' class="next-2 next" value = 'Submit'>
+    </form>		
+<?php } ?>
